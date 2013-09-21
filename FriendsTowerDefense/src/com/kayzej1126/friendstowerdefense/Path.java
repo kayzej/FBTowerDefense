@@ -3,7 +3,7 @@ package com.kayzej1126.friendstowerdefense;
 import com.badlogic.androidgames.framework.Game;
 
 public class Path {
-	public int [][] myPath= new int[1920][1080];
+	public int [][] myPath = new int[1920][1080];
 	
 	public Path(){
 		PathInit(this);

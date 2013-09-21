@@ -1,5 +1,12 @@
 package com.kayzej1126.friendstowerdefense;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import android.graphics.Point;
+
+import com.badlogic.androidgames.framework.Game;
+
 public class World {
     static final int WORLD_WIDTH = 10;
     static final int WORLD_HEIGHT = 13;
@@ -9,12 +16,18 @@ public class World {
 
     public Creep creep;
     public Path path;
+    List<Tower> towers; 
     float tickTime = 0;
     float tick = TICK_INITIAL;
+    public Game game;
+    int openSpots[][] = new int[16][8];
+    int open;
 
-    public World() {
+    public World(Game game1) {
         creep = new Creep(0, Assets.path.getHeight()/2);
         path = new Path();
+        towers = new ArrayList<Tower>();
+        SpotsInit();
     }
 
     public void update(float deltaTime) {       
@@ -24,5 +37,43 @@ public class World {
         		creep.move(path);
         	}
         }
+    }
+    
+    public void SpotsInit(){
+		for (int i=0; i<16; i++){
+			for (int j=0; j<8;j++){
+				openSpots[i][j] = 0;
+			}
+		}
+	}
+    
+    public Point checkSpot(Point touched){
+    	int x = touched.x;
+    	int y = touched.y;
+    	int checkX = 0;
+    	int checkY = 0;
+    	Point drawAt = new Point(); 
+    	for (int i=1;i<=16;i++){
+    		if (x > (i-1)*120 && x < i*120){
+    			drawAt.x = (i-1)*120;
+    			checkX = i;
+    		}
+    	}
+    	
+    	for (int j=0; j<=8; j++){
+    		if (y > (j-1)*135 && y < j*135){
+    			drawAt.y = (j-1)*135;
+    			checkY = j;
+    		}
+		}
+    	if (openSpots[checkX][checkY] == 0){
+    		openSpots[checkX][checkY] = 1;
+    		return drawAt;
+    	}
+    	else{
+    		drawAt.x = 9999;
+    		drawAt.y = 9999;
+    		return drawAt;
+    	}
     }
 }
