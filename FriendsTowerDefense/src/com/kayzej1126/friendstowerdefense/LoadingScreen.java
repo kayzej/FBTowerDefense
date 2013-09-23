@@ -14,8 +14,7 @@ public class LoadingScreen extends Screen {
         Graphics g = game.getGraphics();
         Assets.background = g.newPixmap("background.jpg", PixmapFormat.RGB565);
         Assets.creep = g.newPixmap("zergling.png", PixmapFormat.ARGB4444);
-        Assets.path = g.newPixmap("path.jpg", PixmapFormat.ARGB4444);
-        //Assets.tower = g.newPixmap("tower.png", PixmapFormat.ARGB4444);
+        Assets.path = g.newPixmap("path.png", PixmapFormat.ARGB4444);
         Assets.tower = g.newPixmap("tower_sized.png", PixmapFormat.ARGB4444);
         game.setScreen(new TestScreen(game));
     }

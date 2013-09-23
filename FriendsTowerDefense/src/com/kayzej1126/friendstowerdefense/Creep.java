@@ -11,13 +11,13 @@ public class Creep {
 	
 	public void move(Path path){
 		if (!(x>1910 || y>1070)){
-			if (path.myPath[this.x+1][this.y] == 1){
+			if (path.pixelPath[this.x+1][this.y] == 1){
 				x += 1;
 			}
-			else if (path.myPath[this.x][this.y+1] == 1){
+			else if (path.pixelPath[this.x][this.y+1] == 1){
 				y+=1;
 			}
-			else if (path.myPath[this.x + 1][this.y+1] == 1){
+			else if (path.pixelPath[this.x + 1][this.y+1] == 1){
 				x+=1;
 				y+=1;
 			}
