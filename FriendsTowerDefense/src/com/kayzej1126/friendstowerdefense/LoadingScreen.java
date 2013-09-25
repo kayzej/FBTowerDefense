@@ -20,6 +20,7 @@ public class LoadingScreen extends Screen {
         Assets.logo = g.newPixmap("logo.png", PixmapFormat.ARGB4444);
         Assets.mainMenu = g.newPixmap("mainmenu.png", PixmapFormat.ARGB4444);
         Assets.buttons = g.newPixmap("buttons.png", PixmapFormat.ARGB4444);
+        Assets.start_button = g.newPixmap("start_button.png", PixmapFormat.ARGB4444);
         //game.setScreen(new GameScreen(game));
         game.setScreen(new MainMenuScreen(game));
     }

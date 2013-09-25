@@ -13,7 +13,11 @@ public class MainMenuScreen extends Screen {
     }   
 
     public void update(float deltaTime) {
-        Graphics g = game.getGraphics();
+        //Graphics g = game.getGraphics();
+        int backWidth = Assets.background.getWidth();
+        int backHeight = Assets.background.getHeight();
+        int logoWidth = Assets.logo.getWidth();
+        int logoHeight = Assets.logo.getHeight();
         List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
         game.getInput().getKeyEvents();       
         
@@ -21,17 +25,17 @@ public class MainMenuScreen extends Screen {
         for(int i = 0; i < len; i++) {
             TouchEvent event = touchEvents.get(i);
             if(event.type == TouchEvent.TOUCH_UP) {
-                if(inBounds(event, 0, g.getHeight() - 64, 64, 64)) {
-                    Settings.soundEnabled = !Settings.soundEnabled;
-                    if(Settings.soundEnabled)
-                        Assets.click.play(1);
+                if(inBounds(event, backWidth/2 - logoWidth/2, backHeight/2 - logoHeight, logoWidth, logoHeight)) {
+                	game.setScreen(new GameScreen(game));
                 }
-                if(inBounds(event, 64, 220, 192, 42) ) {
-                    game.setScreen(new GameScreen(game));
-                    if(Settings.soundEnabled)
-                        Assets.click.play(1);
-                    return;
-                }
+//                if(inBounds(event, 64, 220, 192, 42) ) {
+//                    Settings.soundEnabled = !Settings.soundEnabled;
+//                    if(Settings.soundEnabled)
+//                        Assets.click.play(1);
+//                    if(Settings.soundEnabled)
+//                        Assets.click.play(1);
+//                    return;
+//                }
 //                if(inBounds(event, 64, 220 + 42, 192, 42) ) {
 //                   game.setScreen(new HighscoreScreen(game));
 //                    if(Settings.soundEnabled)

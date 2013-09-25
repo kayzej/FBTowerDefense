@@ -14,6 +14,7 @@ public class GameScreen extends Screen{
 	World world;
 	Point curTouched = new Point();
 	Point drawAt = new Point();
+	boolean running = false;
 	
 	public GameScreen(Game game) {
 		super(game);
@@ -31,6 +32,11 @@ public class GameScreen extends Screen{
 	        TouchEvent event = touchEvents.get(i);
 	        curTouched.x = event.x;
 	        curTouched.y = event.y;
+	        
+	        if (inBounds(event, 20, Assets.background.getHeight()/2, Assets.start_button.getWidth(), Assets.start_button.getHeight())){
+	        	running = true;
+	        }
+	        
 	        drawAt = world.checkSpot(curTouched);
 	        if(!(drawAt.x == 9999 || drawAt.y == 9999)){
 	        	if (world.money >= 10){
@@ -38,15 +44,19 @@ public class GameScreen extends Screen{
 	        		world.money -= 10;
 	        	}
 	        }
-     	}
-	    
+     	}  
 	    world.update(deltaTime);
 	}
 
 	@Override
 	public void present(float deltaTime) {
 		drawBackground();
-		drawWorld(world);
+		if (running){
+			drawWorld(world);
+		}
+		else{
+			drawPre();
+		}
 	}
 
 	public void drawWorld(World world){
@@ -60,7 +70,6 @@ public class GameScreen extends Screen{
 
 		if(world.towers.size() > 0){
 			for (int i=0; i< world.towers.size();i++){
-				
 				g.drawPixmap(Assets.tower, world.towers.get(i).drawHere.x, world.towers.get(i).drawHere.y);
 			}
 		}
@@ -78,6 +87,19 @@ public class GameScreen extends Screen{
 			g.drawPixmap(Assets.path, i*width, height*2);
 		}
 	}
+	
+	public void drawPre(){
+		Graphics g = game.getGraphics();
+		g.drawPixmap(Assets.start_button, 20, Assets.background.getHeight()/2);
+	}
+	
+    private boolean inBounds(TouchEvent event, int x, int y, int width, int height) {
+        if(event.x > x && event.x < x + width - 1 && 
+           event.y > y && event.y < y + height - 1) 
+            return true;
+        else
+            return false;
+    }
 	
 	@Override
 	public void pause() {

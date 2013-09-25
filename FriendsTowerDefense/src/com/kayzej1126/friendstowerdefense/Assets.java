@@ -9,6 +9,7 @@ public class Assets {
     public static Pixmap path;
     public static Pixmap tower;
     public static Pixmap bullet;
+    public static Pixmap start_button;
     
     public static Pixmap logo;
     public static Pixmap mainMenu;
