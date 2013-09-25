@@ -10,16 +10,15 @@ import com.badlogic.androidgames.framework.Pixmap;
 import com.badlogic.androidgames.framework.Screen;
 import com.badlogic.androidgames.framework.Input.TouchEvent;
 
-public class TestScreen extends Screen{
+public class GameScreen extends Screen{
 	World world;
 	Point curTouched = new Point();
 	Point drawAt = new Point();
 	
-	public TestScreen(Game game) {
+	public GameScreen(Game game) {
 		super(game);
 		world = new World(game);
 		world.path.PathSet(game);
-		//world.openSpots = world.path.pixelPath;
 	}
 
 	@Override
@@ -34,7 +33,10 @@ public class TestScreen extends Screen{
 	        curTouched.y = event.y;
 	        drawAt = world.checkSpot(curTouched);
 	        if(!(drawAt.x == 9999 || drawAt.y == 9999)){
-	        	world.towers.add(new Tower(event.x, event.y, drawAt));
+	        	if (world.money >= 10){
+	        		world.towers.add(new Tower(event.x, event.y, drawAt));
+	        		world.money -= 10;
+	        	}
 	        }
      	}
 	    
@@ -54,13 +56,11 @@ public class TestScreen extends Screen{
 			if (world.creeps.get(i).x < 1920 - world.creepSpeed){
 				g.drawPixmap(creepPixmap, world.creeps.get(i).x, world.creeps.get(i).y);
 			}
-			//else{
-				//world.creeps.get(i).remove();
-			//}
 		}
 
 		if(world.towers.size() > 0){
 			for (int i=0; i< world.towers.size();i++){
+				
 				g.drawPixmap(Assets.tower, world.towers.get(i).drawHere.x, world.towers.get(i).drawHere.y);
 			}
 		}

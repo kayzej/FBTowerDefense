@@ -20,7 +20,10 @@ public class Path {
 	
 	public void PathSet(Game g){
 		g.getGraphics();
-		int width = Assets.path.getWidth();
+		//int width = Assets.path.getWidth() + Assets.path.getWidth()/2;
+		//int width = (3/2)*Assets.path.getWidth();
+		int width = 3*Assets.path.getWidth();
+		width = width/2;
 		int height = Assets.path.getHeight();
 		
 		for (int i=0; i<width;i++){

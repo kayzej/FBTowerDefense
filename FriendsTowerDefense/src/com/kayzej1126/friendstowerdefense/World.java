@@ -12,22 +12,25 @@ public class World {
     static final float TICK_DECREMENT = 0.05f;
 
     List<Creep> creeps;
+    List<Tower> towers;
+    List<Bullets> bullets;
     public Path path;
-    List<Tower> towers; 
     float tickTime = 0;
     float tick = TICK_INITIAL;
     public Game game;
     int openSpots[][] = new int[16][8];
     int open, creepSpeed;
+    int money;
 
     public World(Game game1) {
     	System.out.println("before creep add");
     	creeps = new ArrayList<Creep>();
-    	creeps.add(new Creep(0, Assets.path.getHeight()/2));
         path = new Path();
         towers = new ArrayList<Tower>();
-        creepSpeed = 10;
+        bullets = new ArrayList<Bullets>();
+        creepSpeed = 5;
         SpotsInit();
+        money = 100;
     }
 
     public void update(float deltaTime) {       
@@ -92,5 +95,9 @@ public class World {
     		drawAt.y = 9999;
     		return drawAt;
     	}
+    }
+    
+    public void Shoot(Tower tower){
+    	
     }
 }

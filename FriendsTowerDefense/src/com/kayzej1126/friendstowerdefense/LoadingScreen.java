@@ -16,7 +16,12 @@ public class LoadingScreen extends Screen {
         Assets.creep = g.newPixmap("zergling.png", PixmapFormat.ARGB4444);
         Assets.path = g.newPixmap("path.png", PixmapFormat.ARGB4444);
         Assets.tower = g.newPixmap("tower_sized.png", PixmapFormat.ARGB4444);
-        game.setScreen(new TestScreen(game));
+        Assets.bullet = g.newPixmap("bullet.png", PixmapFormat.ARGB4444);
+        Assets.logo = g.newPixmap("logo.png", PixmapFormat.ARGB4444);
+        Assets.mainMenu = g.newPixmap("mainmenu.png", PixmapFormat.ARGB4444);
+        Assets.buttons = g.newPixmap("buttons.png", PixmapFormat.ARGB4444);
+        //game.setScreen(new GameScreen(game));
+        game.setScreen(new MainMenuScreen(game));
     }
     
     public void present(float deltaTime) {
