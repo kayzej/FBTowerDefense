@@ -35,6 +35,7 @@ public class GameScreen extends Screen{
 	        
 	        if (inBounds(event, 20, Assets.background.getHeight()/2, Assets.start_button.getWidth(), Assets.start_button.getHeight())){
 	        	running = true;
+	        	world.running = true;
 	        }
 	        
 	        drawAt = world.checkSpot(curTouched);
@@ -51,10 +52,8 @@ public class GameScreen extends Screen{
 	@Override
 	public void present(float deltaTime) {
 		drawBackground();
-		if (running){
-			drawWorld(world);
-		}
-		else{
+		drawWorld(world);
+		if (!running){
 			drawPre();
 		}
 	}

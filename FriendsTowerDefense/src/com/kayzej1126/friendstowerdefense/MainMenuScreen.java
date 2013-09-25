@@ -16,8 +16,10 @@ public class MainMenuScreen extends Screen {
         //Graphics g = game.getGraphics();
         int backWidth = Assets.background.getWidth();
         int backHeight = Assets.background.getHeight();
-        int logoWidth = Assets.logo.getWidth();
+        //int logoWidth = Assets.logo.getWidth();
         int logoHeight = Assets.logo.getHeight();
+        int playWidth = Assets.play.getWidth();
+        int playHeight = Assets.play.getHeight();
         List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
         game.getInput().getKeyEvents();       
         
@@ -25,29 +27,9 @@ public class MainMenuScreen extends Screen {
         for(int i = 0; i < len; i++) {
             TouchEvent event = touchEvents.get(i);
             if(event.type == TouchEvent.TOUCH_UP) {
-                if(inBounds(event, backWidth/2 - logoWidth/2, backHeight/2 - logoHeight, logoWidth, logoHeight)) {
+                if(inBounds(event, backWidth/2 - playWidth/2, backHeight/2 + logoHeight, playWidth, playHeight)) {
                 	game.setScreen(new GameScreen(game));
                 }
-//                if(inBounds(event, 64, 220, 192, 42) ) {
-//                    Settings.soundEnabled = !Settings.soundEnabled;
-//                    if(Settings.soundEnabled)
-//                        Assets.click.play(1);
-//                    if(Settings.soundEnabled)
-//                        Assets.click.play(1);
-//                    return;
-//                }
-//                if(inBounds(event, 64, 220 + 42, 192, 42) ) {
-//                   game.setScreen(new HighscoreScreen(game));
-//                    if(Settings.soundEnabled)
-//                        Assets.click.play(1);
-//                    return;
-//                }
-//                if(inBounds(event, 64, 220 + 84, 192, 42) ) {
-//                    game.setScreen(new HelpScreen(game));
-//                    if(Settings.soundEnabled)
-//                        Assets.click.play(1);
-//                    return;
-//                }
             }
         }
     }
@@ -67,9 +49,11 @@ public class MainMenuScreen extends Screen {
         int backHeight = Assets.background.getHeight();
         int logoWidth = Assets.logo.getWidth();
         int logoHeight = Assets.logo.getHeight();
+        int playWidth = Assets.play.getWidth();
+       // int playHeight = Assets.play.getHeight();
         g.drawPixmap(Assets.background, 0, 0);
         g.drawPixmap(Assets.logo, backWidth/2 - logoWidth/2, backHeight/2 - logoHeight);
-        g.drawPixmap(Assets.mainMenu, backWidth/2 - Assets.mainMenu.getWidth()/2, backHeight/2 + logoHeight);
+        g.drawPixmap(Assets.play, backWidth/2 - playWidth/2, backHeight/2 + logoHeight);
         if(Settings.soundEnabled)
             g.drawPixmap(Assets.buttons, 0, 416, 0, 0, 64, 64);
         else

@@ -21,6 +21,7 @@ public class World {
     int openSpots[][] = new int[16][8];
     int open, creepSpeed;
     int money;
+    boolean running;
 
     public World(Game game1) {
     	System.out.println("before creep add");
@@ -45,7 +46,9 @@ public class World {
         
         tickTime += deltaTime;
         if (tickTime > 1){
-        	creeps.add(new Creep(0, Assets.path.getHeight()/2));
+        	if (running){
+        		creeps.add(new Creep(0, Assets.path.getHeight()/2));
+        	}
         	tickTime = 0;
         }
     }
