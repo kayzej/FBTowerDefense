@@ -15,6 +15,8 @@ public class GameScreen extends Screen{
 	Point curTouched = new Point();
 	Point drawAt = new Point();
 	boolean running = false;
+	int start_buttonX = 20;
+	int start_buttonY = Assets.background.getHeight() - Assets.buttons.getHeight()/3;
 	
 	public GameScreen(Game game) {
 		super(game);
@@ -33,7 +35,7 @@ public class GameScreen extends Screen{
 	        curTouched.x = event.x;
 	        curTouched.y = event.y;
 	        
-	        if (inBounds(event, 20, Assets.background.getHeight()/2, Assets.start_button.getWidth(), Assets.start_button.getHeight())){
+	        if (inBounds(event, start_buttonX, start_buttonY, Assets.start_button.getWidth(), Assets.start_button.getHeight())){
 	        	running = true;
 	        	world.running = true;
 	        }
@@ -89,7 +91,7 @@ public class GameScreen extends Screen{
 	
 	public void drawPre(){
 		Graphics g = game.getGraphics();
-		g.drawPixmap(Assets.start_button, 20, Assets.background.getHeight()/2);
+		g.drawPixmap(Assets.start_button, start_buttonX, start_buttonY);
 	}
 	
     private boolean inBounds(TouchEvent event, int x, int y, int width, int height) {

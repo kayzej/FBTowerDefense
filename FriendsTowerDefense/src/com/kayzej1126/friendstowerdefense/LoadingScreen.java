@@ -18,11 +18,9 @@ public class LoadingScreen extends Screen {
         Assets.tower = g.newPixmap("tower_sized.png", PixmapFormat.ARGB4444);
         Assets.bullet = g.newPixmap("bullet.png", PixmapFormat.ARGB4444);
         Assets.logo = g.newPixmap("logo.png", PixmapFormat.ARGB4444);
-        //Assets.mainMenu = g.newPixmap("mainmenu.png", PixmapFormat.ARGB4444);
         Assets.buttons = g.newPixmap("buttons.png", PixmapFormat.ARGB4444);
         Assets.start_button = g.newPixmap("start_button.png", PixmapFormat.ARGB4444);
-        Assets.play = g.newPixmap("play_button.png",PixmapFormat.ARGB4444);
-        //game.setScreen(new GameScreen(game));
+        Assets.play = g.newPixmap("play_button.PNG",PixmapFormat.ARGB4444);
         game.setScreen(new MainMenuScreen(game));
     }
     
