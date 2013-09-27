@@ -24,22 +24,25 @@ public class World {
     boolean running;
 
     public World(Game game1) {
-    	System.out.println("before creep add");
     	creeps = new ArrayList<Creep>();
-        path = new Path();
         towers = new ArrayList<Tower>();
         bullets = new ArrayList<Bullets>();
-        creepSpeed = 5;
+        path = new Path();
+        creepSpeed = 10;
         SpotsInit();
         money = 100;
     }
 
     public void update(float deltaTime) {       
-     
         for (int i=0; i< creeps.size();i++){
         	if (creeps.get(i).x < 1920 - creepSpeed){
         		for (int j=0;j<creepSpeed;j++){
-        			creeps.get(i).move(path);
+        			if (creeps.get(i).k < path.points.size()){
+        				creeps.get(i).move(path, path.points.get(creeps.get(i).k));
+        			}
+        			else{
+        				creeps.remove(i);
+        			}
         		}
         	}
         }
@@ -47,24 +50,17 @@ public class World {
         tickTime += deltaTime;
         if (tickTime > 1){
         	if (running){
-        		creeps.add(new Creep(0, Assets.path.getHeight()/2));
+        		creeps.add(new Creep(0, 0));
         	}
         	tickTime = 0;
         }
     }
     
     public void SpotsInit(){
-		for (int i=0; i<16; i++){
-			for (int j=0; j<8;j++){
-				openSpots[i][j] = 0;
+    	for (int j=0; j<8;j++){
+    		for (int i=0; i<15; i++){	
+				openSpots[i][j] = levels.level1[j][i];
 			}
-		}
-		
-		openSpots[0][1] = 1;
-		openSpots[1][1] = 1;
-		openSpots[2][1] = 1;
-		for (int j=2; j<16; j++){
-			openSpots[j][2] = 1;
 		}
 	}
     

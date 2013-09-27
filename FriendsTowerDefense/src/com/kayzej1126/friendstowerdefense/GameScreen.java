@@ -1,7 +1,6 @@
 package com.kayzej1126.friendstowerdefense;
 
 import java.util.List;
-
 import android.graphics.Point;
 
 import com.badlogic.androidgames.framework.Game;
@@ -16,12 +15,13 @@ public class GameScreen extends Screen{
 	Point drawAt = new Point();
 	boolean running = false;
 	int start_buttonX = 20;
-	int start_buttonY = Assets.background.getHeight() - Assets.buttons.getHeight()/3;
+	int start_buttonY = (2*Assets.background.getHeight())/3;
+	int levelX = 0;
+	int levelY = 0;
 	
 	public GameScreen(Game game) {
 		super(game);
 		world = new World(game);
-		world.path.PathSet(game);
 	}
 
 	@Override
@@ -81,11 +81,13 @@ public class GameScreen extends Screen{
 		int height = Assets.path.getHeight();
 		int width = Assets.path.getWidth();
 		g.drawPixmap(Assets.background, 0, 0);
-		g.drawPixmap(Assets.path, 0, height);
-		g.drawPixmap(Assets.path, width, height);
-		g.drawPixmap(Assets.path, 2*width, height);
-		for (int i=2; i<16; i++){
-			g.drawPixmap(Assets.path, i*width, height*2);
+		
+		for (int y=0;y<8;y++){
+			for (int x=0;x<16;x++){
+				if (levels.level1[y][x] == 1){
+					g.drawPixmap(Assets.path, x*width, y*height);
+				}
+			}
 		}
 	}
 	

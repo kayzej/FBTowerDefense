@@ -1,35 +1,31 @@
 package com.kayzej1126.friendstowerdefense;
 
+import android.graphics.Point;
+
 public class Creep {
-	public int x, y, speed;
+	public int x, y, k, speed;
 	
 	public Creep(int x, int y){
 		this.x = x;
 		this.y = y;
 		this.speed = 1;
+		this.k = 0;
 	}
 	
-	public void move(Path path){
+	public void move(Path path, Point point){
 		if (!(x>1910 || y>1070)){
-			if (path.pixelPath[this.x+1][this.y] == 1){
-				x += 1;
-			}
-			else if (path.pixelPath[this.x][this.y+1] == 1){
-				y+=1;
-			}
-			else if (path.pixelPath[this.x + 1][this.y+1] == 1){
+			if (x < point.x){
 				x+=1;
+			}
+			else if (y < point.y){
 				y+=1;
 			}
-			else {
-				
+			else if (y > point.y){
+				y-=1;
+			}
+			else{
+				k+=1;
 			}
 		}
-	}
-	
-	public void remove(){
-		this.x = 0;
-		this.y = 0;
-		this.speed = 0;
 	}
 }

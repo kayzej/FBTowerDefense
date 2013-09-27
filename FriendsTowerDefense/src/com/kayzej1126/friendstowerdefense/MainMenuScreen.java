@@ -13,10 +13,8 @@ public class MainMenuScreen extends Screen {
     }   
 
     public void update(float deltaTime) {
-        //Graphics g = game.getGraphics();
         int backWidth = Assets.background.getWidth();
         int backHeight = Assets.background.getHeight();
-        //int logoWidth = Assets.logo.getWidth();
         int logoHeight = Assets.logo.getHeight();
         int playWidth = Assets.play.getWidth();
         int playHeight = Assets.play.getHeight();
@@ -50,14 +48,13 @@ public class MainMenuScreen extends Screen {
         int logoWidth = Assets.logo.getWidth();
         int logoHeight = Assets.logo.getHeight();
         int playWidth = Assets.play.getWidth();
-       // int playHeight = Assets.play.getHeight();
         g.drawPixmap(Assets.background, 0, 0);
         g.drawPixmap(Assets.logo, backWidth/2 - logoWidth/2, backHeight/2 - logoHeight);
         g.drawPixmap(Assets.play, backWidth/2 - playWidth/2, backHeight/2 + logoHeight);
-        if(Settings.soundEnabled)
-            g.drawPixmap(Assets.buttons, 0, 416, 0, 0, 64, 64);
-        else
-            g.drawPixmap(Assets.buttons, 0, 416, 64, 0, 64, 64);
+//        if(Settings.soundEnabled)
+//            g.drawPixmap(Assets.buttons, 0, 416, 0, 0, 64, 64);
+//        else
+//            g.drawPixmap(Assets.buttons, 0, 416, 64, 0, 64, 64);
     }
 
     public void pause() {        

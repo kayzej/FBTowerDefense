@@ -22,6 +22,7 @@ public class LoadingScreen extends Screen {
         Assets.start_button = g.newPixmap("start_button.png", PixmapFormat.ARGB4444);
         Assets.play = g.newPixmap("play_button.PNG",PixmapFormat.ARGB4444);
         game.setScreen(new MainMenuScreen(game));
+        //game.setScreen(new GameScreen(game));
     }
     
     public void present(float deltaTime) {
