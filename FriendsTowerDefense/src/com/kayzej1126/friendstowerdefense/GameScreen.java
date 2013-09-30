@@ -18,6 +18,10 @@ public class GameScreen extends Screen{
 	int start_buttonY = (2*Assets.background.getHeight())/3;
 	int levelX = 0;
 	int levelY = 0;
+	int towerHeight = Assets.tower.getHeight();
+	int towerWidth = Assets.tower.getWidth();
+	int pathHeight = Assets.path.getHeight();
+	int pathWidth = Assets.path.getWidth();
 	
 	public GameScreen(Game game) {
 		super(game);
@@ -40,6 +44,8 @@ public class GameScreen extends Screen{
 	        	world.running = true;
 	        }
 	        
+	        if (inBounds(event, 15*pathWidth, 0,towerWidth, towerHeight))
+	        
 	        drawAt = world.checkSpot(curTouched);
 	        if(!(drawAt.x == 9999 || drawAt.y == 9999)){
 	        	if (world.money >= 10){
@@ -55,6 +61,7 @@ public class GameScreen extends Screen{
 	public void present(float deltaTime) {
 		drawBackground();
 		drawWorld(world);
+		drawButtons();
 		if (!running){
 			drawPre();
 		}
@@ -78,16 +85,21 @@ public class GameScreen extends Screen{
 	
 	public void drawBackground(){
 		Graphics g = game.getGraphics();
-		int height = Assets.path.getHeight();
-		int width = Assets.path.getWidth();
 		g.drawPixmap(Assets.background, 0, 0);
 		
 		for (int y=0;y<8;y++){
 			for (int x=0;x<16;x++){
 				if (levels.level1[y][x] == 1){
-					g.drawPixmap(Assets.path, x*width, y*height);
+					g.drawPixmap(Assets.path, x*pathWidth, y*pathHeight);
 				}
 			}
+		}
+	}
+	
+	public void drawButtons(){
+		Graphics g = game.getGraphics();
+		for (int i=0;i<8;i++){
+			g.drawPixmap(Assets.tower, 15*pathWidth, i*pathHeight);
 		}
 	}
 	
