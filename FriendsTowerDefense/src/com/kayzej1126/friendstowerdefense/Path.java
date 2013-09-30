@@ -18,7 +18,6 @@ public class Path {
 	public void PathInit(Path path){
 		int y=0;
 		int x=0;
-		int i=0;
 		int lengthX = 120;
 		int lengthY = 135;
 		String direction = "right";
@@ -31,7 +30,7 @@ public class Path {
 				y++;
 			}
 		}
-		while (x<16){
+		while (x<14){
 			points.add(new Point(x*lengthX,y*lengthY));
 			try {
 				if (levels.level1[y][x+1] == 1){
@@ -49,11 +48,8 @@ public class Path {
 			}
 			catch (Exception e) {
 				points.add(new Point(x*lengthX,y*lengthY));
-				x = 16;
+				x = 14;
 			}
-		
-			System.out.println("x: " + points.get(i).x + " y: " + points.get(i).y);
-			i++;
 		}
 	}
 }

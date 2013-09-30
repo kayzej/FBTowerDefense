@@ -11,6 +11,9 @@ public class Assets {
     public static Pixmap bullet;
     public static Pixmap start_button;
     public static Pixmap play;
+    public static Pixmap mineral;
+    public static Pixmap command_center;
+    public static Pixmap barracks; 
     
     public static Pixmap logo;
     //public static Pixmap mainMenu;

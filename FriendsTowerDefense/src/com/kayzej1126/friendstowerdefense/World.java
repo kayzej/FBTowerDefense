@@ -62,6 +62,17 @@ public class World {
 				openSpots[i][j] = levels.level1[j][i];
 			}
 		}
+    	
+    	for (int i=0; i<16; i++){
+    		openSpots[i][0] = 1;
+    		openSpots[i][7] = 1;
+    	}
+    	
+    	for (int i=0; i<8; i++){
+    		openSpots[14][i] = 1;
+    		openSpots[15][i] = 1;
+    	}
+    	
 	}
     
     public Point checkSpot(Point touched){

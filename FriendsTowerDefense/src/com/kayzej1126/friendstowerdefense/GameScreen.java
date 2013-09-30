@@ -1,6 +1,8 @@
 package com.kayzej1126.friendstowerdefense;
 
 import java.util.List;
+
+import android.graphics.Color;
 import android.graphics.Point;
 
 import com.badlogic.androidgames.framework.Game;
@@ -14,14 +16,15 @@ public class GameScreen extends Screen{
 	Point curTouched = new Point();
 	Point drawAt = new Point();
 	boolean running = false;
-	int start_buttonX = 20;
-	int start_buttonY = (2*Assets.background.getHeight())/3;
+	
 	int levelX = 0;
 	int levelY = 0;
 	int towerHeight = Assets.tower.getHeight();
 	int towerWidth = Assets.tower.getWidth();
 	int pathHeight = Assets.path.getHeight();
 	int pathWidth = Assets.path.getWidth();
+	int start_buttonX = 20;
+	int start_buttonY = pathHeight * 7 - 50;
 	
 	public GameScreen(Game game) {
 		super(game);
@@ -44,7 +47,7 @@ public class GameScreen extends Screen{
 	        	world.running = true;
 	        }
 	        
-	        if (inBounds(event, 15*pathWidth, 0,towerWidth, towerHeight))
+	        //if (inBounds(event, 15*pathWidth, 0,towerWidth, towerHeight))
 	        
 	        drawAt = world.checkSpot(curTouched);
 	        if(!(drawAt.x == 9999 || drawAt.y == 9999)){
@@ -62,6 +65,7 @@ public class GameScreen extends Screen{
 		drawBackground();
 		drawWorld(world);
 		drawButtons();
+		drawBanner();
 		if (!running){
 			drawPre();
 		}
@@ -86,7 +90,8 @@ public class GameScreen extends Screen{
 	public void drawBackground(){
 		Graphics g = game.getGraphics();
 		g.drawPixmap(Assets.background, 0, 0);
-		
+		int xCC = world.path.points.get(world.path.points.size() - 1).x;
+		int yCC = world.path.points.get(world.path.points.size() - 1).y;
 		for (int y=0;y<8;y++){
 			for (int x=0;x<16;x++){
 				if (levels.level1[y][x] == 1){
@@ -94,12 +99,25 @@ public class GameScreen extends Screen{
 				}
 			}
 		}
+		g.drawPixmap(Assets.command_center, xCC, yCC);
+	}
+	
+	public void drawBanner(){
+		Graphics g = game.getGraphics();
+		//g.drawRect(0, 0, 13*pathWidth, 135, Color.BLACK);
+		g.drawPixmap(Assets.mineral, 240, 0);
+		//g.drawString("abc", 250, 0);
 	}
 	
 	public void drawButtons(){
 		Graphics g = game.getGraphics();
-		for (int i=0;i<8;i++){
-			g.drawPixmap(Assets.tower, 15*pathWidth, i*pathHeight);
+		g.drawRect(14*pathWidth, 0, 1080, 240, Color.BLACK);
+		g.drawRect(0, 6*pathHeight, 1920, 270, Color.BLACK);
+		g.drawPixmap(Assets.barracks, 14*pathWidth, 0);
+		
+		for (int i=2;i<8;i++){
+			g.drawPixmap(Assets.tower, 14*towerWidth, i*towerHeight);
+			g.drawPixmap(Assets.tower, 15*towerWidth, i*towerHeight);
 		}
 	}
 	
