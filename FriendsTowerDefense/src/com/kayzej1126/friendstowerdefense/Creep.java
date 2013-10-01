@@ -12,7 +12,7 @@ public class Creep {
 		this.k = 0;
 	}
 	
-	public void move(Path path, Point point){
+	public void move(Point point){
 		if (!(x>1910 || y>1070)){
 			if (x < point.x){
 				x+=1;

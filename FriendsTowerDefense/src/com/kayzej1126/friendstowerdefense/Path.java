@@ -33,7 +33,7 @@ public class Path {
 		while (x<14){
 			points.add(new Point(x*lengthX,y*lengthY));
 			try {
-				if (levels.level1[y][x+1] == 1){
+				if (levels.level1[y][x+1] == 1 && (direction != "left")){
 					x+=1;
 					direction = "right";
 				}
@@ -44,6 +44,10 @@ public class Path {
 				else if (levels.level1[y-1][x] == 1 && (direction != "up")){
 					y-=1;
 					direction = "down";
+				}
+				else if (levels.level1[y][x-1] ==1 && (direction != "right")){
+					x-=1;
+					direction = "left";
 				}
 			}
 			catch (Exception e) {

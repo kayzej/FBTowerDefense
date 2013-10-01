@@ -38,7 +38,7 @@ public class World {
         	if (creeps.get(i).x < 1920 - creepSpeed){
         		for (int j=0;j<creepSpeed;j++){
         			if (creeps.get(i).k < path.points.size()){
-        				creeps.get(i).move(path, path.points.get(creeps.get(i).k));
+        				creeps.get(i).move(path.points.get(creeps.get(i).k));
         			}
         			else{
         				creeps.remove(i);
@@ -50,7 +50,7 @@ public class World {
         tickTime += deltaTime;
         if (tickTime > 1){
         	if (running){
-        		creeps.add(new Creep(0, 0));
+        		creeps.add(new Creep(path.points.get(0).x, path.points.get(0).y));
         	}
         	tickTime = 0;
         }
