@@ -2,6 +2,7 @@ package com.kayzej1126.friendstowerdefense;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.Math;
 
 import android.graphics.Point;
 
@@ -21,7 +22,7 @@ public class World {
     int openSpots[][] = new int[16][8];
     int open, creepSpeed;
     int money;
-    boolean running;
+    boolean running, inRange;
 
     public World(Game game1) {
     	creeps = new ArrayList<Creep>();
@@ -51,6 +52,18 @@ public class World {
         if (tickTime > 1){
         	if (running){
         		creeps.add(new Creep(path.points.get(0).x, path.points.get(0).y));
+        		for (int i=0;i<towers.size();i++){
+        			int j=0;
+        			while (!inRange && j<creeps.size()){
+        				Line line = new Line(towers.get(i).x, creeps.get(j).x, towers.get(i).y, creeps.get(j).y);
+        				int length = line.length;
+        				if (length < towers.get(i).range){
+        					inRange = true;
+        					towers.get(i).shoot(creeps.get(j), line);
+        				}
+        				j++;
+        			}
+        		}
         	}
         	tickTime = 0;
         }
@@ -105,9 +118,5 @@ public class World {
     		drawAt.y = 9999;
     		return drawAt;
     	}
-    }
-    
-    public void Shoot(Tower tower){
-    	
     }
 }

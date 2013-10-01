@@ -56,7 +56,7 @@ public class GameScreen extends Screen{
 	        		world.money -= 10;
 	        	}
 	        }
-     	}  
+     	} 
 	    world.update(deltaTime);
 	}
 
@@ -83,6 +83,8 @@ public class GameScreen extends Screen{
 		if(world.towers.size() > 0){
 			for (int i=0; i< world.towers.size();i++){
 				g.drawPixmap(Assets.tower, world.towers.get(i).drawHere.x, world.towers.get(i).drawHere.y);
+				g.drawLine(world.towers.get(i).bulletLine.x1, world.towers.get(i).bulletLine.y1, world.towers.get(i).bulletLine.x2, world.towers.get(i).bulletLine.y2, Color.YELLOW);
+				//g.drawPixmap(Assets.bullet, x, y)
 			}
 		}
 	}
@@ -112,7 +114,7 @@ public class GameScreen extends Screen{
 	public void drawButtons(){
 		Graphics g = game.getGraphics();
 		g.drawRect(14*pathWidth, 0, 1080, 240, Color.BLACK);
-		g.drawRect(0, 6*pathHeight, 1920, 270, Color.BLACK);
+		//g.drawRect(0, 6*pathHeight, 1920, 270, Color.BLACK);
 		g.drawPixmap(Assets.barracks, 14*pathWidth, 0);
 		
 		for (int i=2;i<8;i++){
