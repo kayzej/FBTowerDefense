@@ -16,6 +16,7 @@ public class GameScreen extends Screen{
 	Point curTouched = new Point();
 	Point drawAt = new Point();
 	boolean running = false;
+	boolean readyToPlace = false;
 	
 	int levelX = 0;
 	int levelY = 0;
@@ -34,26 +35,31 @@ public class GameScreen extends Screen{
 	@Override
 	public void update(float deltaTime) {
     	List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
-	    game.getInput().getKeyEvents();    
+	    game.getInput().getKeyEvents();
 	    int len = touchEvents.size();
-	   
-	    for(int i = 0; i < len; i++) {
-	        TouchEvent event = touchEvents.get(i);
+	    for(int i = 0; i < len; i++) { 
+	    	TouchEvent event = touchEvents.get(i);
 	        curTouched.x = event.x;
 	        curTouched.y = event.y;
+	        System.out.println("touchEvent: " + touchEvents.get(i).type);
 	        
 	        if (inBounds(event, start_buttonX, start_buttonY, Assets.start_button.getWidth(), Assets.start_button.getHeight())){
 	        	running = true;
 	        	world.running = true;
 	        }
 	        
-	        //if (inBounds(event, 15*pathWidth, 0,towerWidth, towerHeight))
-	        
-	        drawAt = world.checkSpot(curTouched);
-	        if(!(drawAt.x == 9999 || drawAt.y == 9999)){
-	        	if (world.money >= 10){
-	        		world.towers.add(new Tower(event.x, event.y, drawAt));
-	        		world.money -= 10;
+	        if (event.type == 1 && inBounds(event, 14*pathWidth, 2*pathHeight,towerWidth*2, towerHeight*2)){
+	        	readyToPlace = !readyToPlace;
+	        	System.out.println("touched: " + readyToPlace);
+	        }
+	        if (readyToPlace){
+	        	drawAt = world.checkSpot(curTouched);
+	        	if(!(drawAt.x == 9999 || drawAt.y == 9999)){
+	        		if (world.money >= 10){
+	        			world.towers.add(new Tower(event.x, event.y, drawAt));
+	        			world.money -= 10;
+	        			readyToPlace = false;
+	        		}
 	        	}
 	        }
      	} 
@@ -106,8 +112,16 @@ public class GameScreen extends Screen{
 	
 	public void drawBanner(){
 		Graphics g = game.getGraphics();
+		int color;
 		//g.drawRect(0, 0, 13*pathWidth, 135, Color.BLACK);
 		g.drawPixmap(Assets.mineral, 240, 0);
+		if(readyToPlace){
+			color = Color.GREEN;
+		}
+		else {
+			color = Color.RED;
+		}
+			g.drawRect(3*pathWidth, 7*pathHeight, pathWidth/4, pathHeight/4, color);
 		//g.drawString("abc", 250, 0);
 	}
 	
