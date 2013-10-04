@@ -2,7 +2,6 @@ package com.kayzej1126.friendstowerdefense;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.lang.Math;
 
 import android.graphics.Point;
 

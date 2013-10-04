@@ -41,7 +41,6 @@ public class GameScreen extends Screen{
 	    	TouchEvent event = touchEvents.get(i);
 	        curTouched.x = event.x;
 	        curTouched.y = event.y;
-	        System.out.println("touchEvent: " + touchEvents.get(i).type);
 	        
 	        if (inBounds(event, start_buttonX, start_buttonY, Assets.start_button.getWidth(), Assets.start_button.getHeight())){
 	        	running = true;
@@ -50,13 +49,13 @@ public class GameScreen extends Screen{
 	        
 	        if (event.type == 1 && inBounds(event, 14*pathWidth, 2*pathHeight,towerWidth*2, towerHeight*2)){
 	        	readyToPlace = !readyToPlace;
-	        	System.out.println("touched: " + readyToPlace);
 	        }
+	        
 	        if (readyToPlace){
 	        	drawAt = world.checkSpot(curTouched);
 	        	if(!(drawAt.x == 9999 || drawAt.y == 9999)){
 	        		if (world.money >= 10){
-	        			world.towers.add(new Tower(event.x, event.y, drawAt));
+	        			world.towers.add(new Tower(drawAt.x + Assets.tower.getWidth()/2, drawAt.y + Assets.tower.getHeight()/2, drawAt));
 	        			world.money -= 10;
 	        			readyToPlace = false;
 	        		}
