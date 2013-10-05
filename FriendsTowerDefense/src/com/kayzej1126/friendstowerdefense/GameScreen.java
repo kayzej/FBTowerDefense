@@ -79,16 +79,23 @@ public class GameScreen extends Screen{
 	public void drawWorld(World world){
 		Graphics g = game.getGraphics();
 		Pixmap creepPixmap= Assets.creep;
-		for (int i=0; i<world.creeps.size();i++){
-			if (world.creeps.get(i).x < 1920 - world.creepSpeed){
-				g.drawPixmap(creepPixmap, world.creeps.get(i).x, world.creeps.get(i).y);
+//		for (int i=0; i<world.creeps.size();i++){
+//			g.drawPixmap(creepPixmap, world.creeps.get(i).x, world.creeps.get(i).y);
+//		}
+		
+		for (int i=0; i<world.cur;i++){
+			if (world.creeps[i]!= null){
+				g.drawPixmap(creepPixmap, world.creeps[i].x, world.creeps[i].y);
 			}
 		}
+
 
 		if(world.towers.size() > 0){
 			for (int i=0; i< world.towers.size();i++){
 				g.drawPixmap(Assets.tower, world.towers.get(i).drawHere.x, world.towers.get(i).drawHere.y);
-				g.drawLine(world.towers.get(i).bulletLine.x1, world.towers.get(i).bulletLine.y1, world.towers.get(i).bulletLine.x2, world.towers.get(i).bulletLine.y2, Color.YELLOW);
+				if (world.towers.get(i).drawLine){
+					g.drawLine(world.towers.get(i).bulletLine.x1, world.towers.get(i).bulletLine.y1, world.towers.get(i).bulletLine.x2, world.towers.get(i).bulletLine.y2, Color.YELLOW);
+				}
 				//g.drawPixmap(Assets.bullet, x, y)
 			}
 		}
