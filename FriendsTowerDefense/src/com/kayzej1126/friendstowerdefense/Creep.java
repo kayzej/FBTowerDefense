@@ -3,11 +3,14 @@ package com.kayzej1126.friendstowerdefense;
 import android.graphics.Point;
 
 public class Creep {
-	public int x, y, k, speed;
+	public int x, y, drawX, drawY,k, speed;
 	
-	public Creep(int x, int y){
-		this.x = x;
-		this.y = y;
+	public Creep(int drawX, int drawY){
+		
+		this.drawX = drawX;
+		this.drawY = drawY;
+		this.x = drawX + Assets.creep.getWidth()/2;
+		this.y = drawY + Assets.creep.getHeight()/2;
 		this.speed = 1;
 		this.k = 0;
 	}

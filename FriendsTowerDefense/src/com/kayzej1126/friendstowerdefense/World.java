@@ -46,26 +46,30 @@ public class World {
         }
         
         tickTime += deltaTime;
-        if (tickTime > 1){
+        if (tickTime > 2){
         	if (running){
         		creeps.add(new Creep(path.points.get(0).x, path.points.get(0).y));
         	}
         	tickTime = 0;
         }
-        int j=0;
+        
+        Line line;
         if (creeps.size() > 0){
-    	for (int i=0;i<towers.size();i++){
-			//while (!inRange && j<creeps.size()){
-				Line line = new Line(towers.get(i).x, creeps.get(j).x, towers.get(i).y, creeps.get(j).y);
-				//if (line.length < towers.get(i).range){
-					//inRange = true;
-					towers.get(i).shoot(creeps.get(j), line);
-				//}
-				if (j < creeps.size() -1){
-					j++;
-				}
-			//}
-		}
+	    	for (int i=0;i<towers.size();i++){
+	    		for (int j=0;j<creeps.size();j++){
+	    			line = new Line(towers.get(i).x, creeps.get(j).x, towers.get(i).y, creeps.get(j).y);
+//	    			System.out.println("line: " + line.length);
+//	    			System.out.println("x2: " + line.x2 + " x1: " + line.x1);
+//	    			System.out.println("y2: " + line.y2 + " y1: " + line.y1);
+	    			if (line.length < towers.get(i).range){
+	    				towers.get(i).shoot(creeps.get(j), line);
+	    				towers.get(i).drawLine = true;
+	    			}
+	    			else{
+	    				towers.get(i).drawLine = false;
+	    			}
+	    		}
+			}
         }
     }
     
