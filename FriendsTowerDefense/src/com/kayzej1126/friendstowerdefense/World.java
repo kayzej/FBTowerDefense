@@ -11,10 +11,9 @@ public class World {
     static final float TICK_INITIAL = 0.1f;
     static final float TICK_DECREMENT = 0.05f;
 
-    //List<Creep> creeps;
     Creep [] creeps;
     List<Tower> towers;
-    List<Bullets> bullets;
+    //List<Bullet> bullets;
     public Path path;
     float tickTime = 0;
     float tick = TICK_INITIAL;
@@ -24,11 +23,10 @@ public class World {
     boolean running, inRange;
 
     public World(Game game1) {
-    	//creeps = new ArrayList<Creep>();
     	creepNums = 100;
         creeps = new Creep [creepNums];
     	towers = new ArrayList<Tower>();
-        bullets = new ArrayList<Bullets>();
+        //bullets = new ArrayList<Bullet>();
         path = new Path();
         creepSpeed = 10;
         SpotsInit();
@@ -37,21 +35,10 @@ public class World {
     }
 
     public void update(float deltaTime) {       
-//        for (int i=0; i< creeps.size();i++){
-//    		for (int j=0;j<creepSpeed;j++){
-//    			if (creeps.get(i).k < path.points.size()){
-//    				creeps.get(i).move(path.points.get(creeps.get(i).k));
-//    			}
-//    			else{
-//    				creeps.remove(i);
-//    			}
-//        	}
-//        }
-    	
     	 for (int i=0; i< cur;i++){
      		for (int j=0;j<creepSpeed;j++){
      			if (creeps[i] != null){
-	     			if (creeps[i].k < path.points.size()){
+	     			if (creeps[i].k < path.points.size() && creeps[i].health > 0){
 	     				creeps[i].move(path.points.get(creeps[i].k));
 	     			}
 	     			else{
@@ -62,31 +49,13 @@ public class World {
          }
         
         tickTime += deltaTime;
-        if (tickTime > 1 && cur < 100){
-        	if (running){
-        		//creeps.add(new Creep(path.points.get(0).x, path.points.get(0).y));
-        		creeps[cur] = new Creep(path.points.get(0).x, path.points.get(0).y);
-        		cur+=1;
-        	}
+        if (tickTime > 1 && cur < 100 && running){
+        	creeps[cur] = new Creep(path.points.get(0).x, path.points.get(0).y);
+        	cur+=1;
         	tickTime = 0;
         }
         
         Line line;
-//        if (creeps.size() > 0){
-//	    	for (int i=0;i<towers.size();i++){
-//	    		for (int j=0;j<creeps.size();j++){
-//	    			line = new Line(towers.get(i).x, creeps.get(j).x, towers.get(i).y, creeps.get(j).y);
-//	    			if (line.length < towers.get(i).range){
-//	    				towers.get(i).shoot(creeps.get(j), line);
-//	    				towers.get(i).drawLine = true;
-//	    			}
-//	    			else{
-//	    				towers.get(i).drawLine = false;
-//	    			}
-//	    		}
-//			}
-//        }
-        
         if (cur > 0){
 	    	for (int i=0;i<towers.size();i++){
 	    		int j=0;
@@ -94,14 +63,17 @@ public class World {
 	    		towers.get(i).drawLine = false;
 	    		while (j<creeps.length && !inRange){
 	    			if (creeps[j] != null){
-		    			line = new Line(towers.get(i).x, creeps[j].x, towers.get(i).y, creeps[j].y);
+		    			line = new Line(towers.get(i).x, creeps[j].x + Assets.creep.getWidth()/2, towers.get(i).y, creeps[j].y + Assets.creep.getHeight()/2);
 		    			if (line.length < towers.get(i).range){
 		    				inRange = true;
 		    				towers.get(i).shoot(creeps[j], line);
-		    				towers.get(i).drawLine = true;
+		    				if (!towers.get(i).hasBullet){
+		    					money +=10;
+		    				}
+		    				//towers.get(i).drawLine = true;
 		    			}
-		    			j++;
 	    			}
+	    			j++;
 	    		}
 			}
         }

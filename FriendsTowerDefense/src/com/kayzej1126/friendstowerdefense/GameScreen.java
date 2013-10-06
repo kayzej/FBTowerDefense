@@ -17,6 +17,7 @@ public class GameScreen extends Screen{
 	Point drawAt = new Point();
 	boolean running = false;
 	boolean readyToPlace = false;
+	boolean healthBars = true;
 	
 	int levelX = 0;
 	int levelY = 0;
@@ -79,26 +80,32 @@ public class GameScreen extends Screen{
 	public void drawWorld(World world){
 		Graphics g = game.getGraphics();
 		Pixmap creepPixmap= Assets.creep;
-//		for (int i=0; i<world.creeps.size();i++){
-//			g.drawPixmap(creepPixmap, world.creeps.get(i).x, world.creeps.get(i).y);
-//		}
-		
 		for (int i=0; i<world.cur;i++){
 			if (world.creeps[i]!= null){
 				g.drawPixmap(creepPixmap, world.creeps[i].x, world.creeps[i].y);
+				if (healthBars){
+					g.drawRect(world.creeps[i].x, world.creeps[i].y - 10, world.creeps[i].health, 5, Color.GREEN);
+					g.drawRect(world.creeps[i].x + world.creeps[i].health, world.creeps[i].y - 10, 100 - world.creeps[i].health, 5, Color.RED);
+				}
 			}
 		}
 
 
-		if(world.towers.size() > 0){
+		//if(world.towers.size() > 0){
 			for (int i=0; i< world.towers.size();i++){
 				g.drawPixmap(Assets.tower, world.towers.get(i).drawHere.x, world.towers.get(i).drawHere.y);
 				if (world.towers.get(i).drawLine){
 					g.drawLine(world.towers.get(i).bulletLine.x1, world.towers.get(i).bulletLine.y1, world.towers.get(i).bulletLine.x2, world.towers.get(i).bulletLine.y2, Color.YELLOW);
 				}
-				//g.drawPixmap(Assets.bullet, x, y)
+				if (world.towers.get(i).hasBullet){
+					g.drawPixmap(Assets.bullet, world.towers.get(i).bullet.x, world.towers.get(i).bullet.y);
+				}
 			}
-		}
+		//}
+		
+//		for (int i=0; i<world.bullets.size();i++){
+//			g.drawPixmap(Assets.bullet, world.bullets.get(i).x, world.bullets.get(i).y);
+//		}
 	}
 	
 	public void drawBackground(){
@@ -119,7 +126,6 @@ public class GameScreen extends Screen{
 	public void drawBanner(){
 		Graphics g = game.getGraphics();
 		int color;
-		//g.drawRect(0, 0, 13*pathWidth, 135, Color.BLACK);
 		g.drawPixmap(Assets.mineral, 240, 0);
 		if(readyToPlace){
 			color = Color.GREEN;
@@ -127,14 +133,12 @@ public class GameScreen extends Screen{
 		else {
 			color = Color.RED;
 		}
-			g.drawRect(3*pathWidth, 7*pathHeight, pathWidth/4, pathHeight/4, color);
-		//g.drawString("abc", 250, 0);
+		g.drawRect(3*pathWidth, 7*pathHeight, pathWidth/4, pathHeight/4, color);
 	}
 	
 	public void drawButtons(){
 		Graphics g = game.getGraphics();
 		g.drawRect(14*pathWidth, 0, 1080, 240, Color.BLACK);
-		//g.drawRect(0, 6*pathHeight, 1920, 270, Color.BLACK);
 		g.drawPixmap(Assets.barracks, 14*pathWidth, 0);
 		
 		for (int i=2;i<8;i++){
