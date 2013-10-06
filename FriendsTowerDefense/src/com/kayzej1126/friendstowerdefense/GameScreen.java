@@ -81,6 +81,7 @@ public class GameScreen extends Screen{
 
 	public void drawWorld(World world){
 		Graphics g = game.getGraphics();
+		
 		Pixmap creepPixmap= Assets.creep;
 		for (int i=0; i<world.cur;i++){
 			if (world.creeps[i]!= null){
@@ -92,22 +93,15 @@ public class GameScreen extends Screen{
 			}
 		}
 
-
-		//if(world.towers.size() > 0){
-			for (int i=0; i< world.towers.size();i++){
-				g.drawPixmap(Assets.tower, world.towers.get(i).drawHere.x, world.towers.get(i).drawHere.y);
-				if (world.towers.get(i).drawLine){
-					g.drawLine(world.towers.get(i).bulletLine.x1, world.towers.get(i).bulletLine.y1, world.towers.get(i).bulletLine.x2, world.towers.get(i).bulletLine.y2, Color.YELLOW);
-				}
-				if (world.towers.get(i).hasBullet){
-					g.drawPixmap(Assets.bullet, world.towers.get(i).bullet.x, world.towers.get(i).bullet.y);
-				}
+		for (int i=0; i< world.towers.size();i++){
+			g.drawPixmap(Assets.tower, world.towers.get(i).drawHere.x, world.towers.get(i).drawHere.y);
+			if (world.towers.get(i).drawLine){
+				g.drawLine(world.towers.get(i).bulletLine.x1, world.towers.get(i).bulletLine.y1, world.towers.get(i).bulletLine.x2, world.towers.get(i).bulletLine.y2, Color.YELLOW);
 			}
-		//}
-		
-//		for (int i=0; i<world.bullets.size();i++){
-//			g.drawPixmap(Assets.bullet, world.bullets.get(i).x, world.bullets.get(i).y);
-//		}
+			if (world.towers.get(i).bullet != null){
+				g.drawPixmap(Assets.bullet, world.towers.get(i).bullet.x, world.towers.get(i).bullet.y);
+			}
+		}
 	}
 	
 	public void drawBackground(){
@@ -128,12 +122,18 @@ public class GameScreen extends Screen{
 	public void drawBanner(){
 		Graphics g = game.getGraphics();
 		int color;
-		StringBuilder sb = new StringBuilder();
-		sb.append("");
-		sb.append(world.money);
-		String strI = sb.toString();
+		StringBuilder moneyText = new StringBuilder();
+		moneyText.append("");
+		moneyText.append(world.money);
+		String moneyString = moneyText.toString();
 		g.drawPixmap(Assets.mineral, 240, 0);
-		g.drawText(Typeface.DEFAULT_BOLD, strI, 240 + Assets.mineral.getWidth() + 100, 100);
+		g.drawText(Typeface.DEFAULT_BOLD, moneyString, 240 + Assets.mineral.getWidth() + 100, 100);
+		
+		StringBuilder livesText = new StringBuilder();
+		livesText.append("Lives: ");
+		livesText.append(world.lives);
+		String livesString = livesText.toString();
+		g.drawText(Typeface.DEFAULT_BOLD, livesString, 1000, 100);
 		if(readyToPlace){
 			color = Color.GREEN;
 		}

@@ -19,19 +19,19 @@ public class World {
     float tick = TICK_INITIAL;
     public Game game;
     int openSpots[][] = new int[16][8];
-    int open, creepSpeed, money, creepNums, cur;
+    int open, lives, creepSpeed, money, creepNums, cur;
     boolean running, inRange;
 
     public World(Game game1) {
     	creepNums = 100;
         creeps = new Creep [creepNums];
     	towers = new ArrayList<Tower>();
-        //bullets = new ArrayList<Bullet>();
         path = new Path();
         creepSpeed = 10;
         SpotsInit();
         money = 100;
         cur = 0;
+        lives = 20;
     }
 
     public void update(float deltaTime) {       
@@ -42,6 +42,12 @@ public class World {
 	     				creeps[i].move(path.points.get(creeps[i].k));
 	     			}
 	     			else{
+	     				if (creeps[i].health <= 0){
+	     					money +=2;
+	     				}
+	     				else if(creeps[i].k >= path.points.size()){
+	     					lives -=1;
+	     				}
 	     				creeps[i] = null;
 	     			}
      			}
@@ -67,10 +73,6 @@ public class World {
 		    			if (line.length < towers.get(i).range){
 		    				inRange = true;
 		    				towers.get(i).shoot(creeps[j], line);
-		    				if (!towers.get(i).hasBullet){
-		    					money +=2;
-		    				}
-		    				//towers.get(i).drawLine = true;
 		    			}
 	    			}
 	    			j++;
