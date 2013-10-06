@@ -2,9 +2,10 @@ package com.kayzej1126.friendstowerdefense;
 
 import java.util.List;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Point;
-
+import android.graphics.Typeface;
 import com.badlogic.androidgames.framework.Game;
 import com.badlogic.androidgames.framework.Graphics;
 import com.badlogic.androidgames.framework.Pixmap;
@@ -15,6 +16,7 @@ public class GameScreen extends Screen{
 	World world;
 	Point curTouched = new Point();
 	Point drawAt = new Point();
+	Context context;
 	boolean running = false;
 	boolean readyToPlace = false;
 	boolean healthBars = true;
@@ -126,7 +128,12 @@ public class GameScreen extends Screen{
 	public void drawBanner(){
 		Graphics g = game.getGraphics();
 		int color;
+		StringBuilder sb = new StringBuilder();
+		sb.append("");
+		sb.append(world.money);
+		String strI = sb.toString();
 		g.drawPixmap(Assets.mineral, 240, 0);
+		g.drawText(Typeface.DEFAULT_BOLD, strI, 240 + Assets.mineral.getWidth() + 100, 100);
 		if(readyToPlace){
 			color = Color.GREEN;
 		}
@@ -134,6 +141,7 @@ public class GameScreen extends Screen{
 			color = Color.RED;
 		}
 		g.drawRect(3*pathWidth, 7*pathHeight, pathWidth/4, pathHeight/4, color);
+
 	}
 	
 	public void drawButtons(){

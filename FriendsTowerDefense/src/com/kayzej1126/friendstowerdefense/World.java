@@ -68,7 +68,7 @@ public class World {
 		    				inRange = true;
 		    				towers.get(i).shoot(creeps[j], line);
 		    				if (!towers.get(i).hasBullet){
-		    					money +=10;
+		    					money +=2;
 		    				}
 		    				//towers.get(i).drawLine = true;
 		    			}

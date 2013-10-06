@@ -9,7 +9,9 @@ import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapFactory.Options;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
 
@@ -111,6 +113,17 @@ public class AndroidGraphics implements Graphics {
 
     public void drawPixmap(Pixmap pixmap, int x, int y) {
         canvas.drawBitmap(((AndroidPixmap)pixmap).bitmap, x, y, null);
+    }
+    
+    public void drawText(Typeface typeface, String text, int x, int y){
+    	Paint paint = new Paint();
+		Typeface font = typeface;
+		paint.setColor(Color.YELLOW);
+        paint.setTypeface(font);
+        paint.setTextSize(28);
+        paint.setTextAlign(Paint.Align.CENTER);
+		canvas.drawText(text, x, y,
+                paint);
     }
 
     public int getWidth() {
